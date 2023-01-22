@@ -3,9 +3,9 @@
 import http.server
 
 file_map = {
-    'revshell': './uploads/reverse-shell.php',
-    'linpeas': './uploads/linpeas.sh',
-    'pspy': './uploads/pspy64'
+    '/revshell': './uploads/reverse-shell.php',
+    '/linpeas': './uploads/linpeas.sh',
+    '/pspy': './uploads/pspy64'
 }
 
 class RequestHandler(http.server.BaseHTTPRequestHandler):

