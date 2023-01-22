@@ -1,0 +1,8 @@
+id,username,password,email,activation_code,is_activated,is_admin,date_created
+1,administrator,15657792073e8a843d4f91fc403454e1,administrator@broscience.htb,OjYUyL9R4NpM9LOFP0T4Q4NUQ9PNpLHf,t,t,2019-03-07 02:02:22.226763-05
+2,bill,13edad4932da9dbb57d9cd15b66ed104,bill@broscience.htb,WLHPyj7NDRx10BYHRJPPgnRAYlMPTkp4,t,f,2019-05-07 03:34:44.127644-04
+3,michael,bd3dad50e2d578ecba87d5fa15ca5f85,michael@broscience.htb,zgXkcmKip9J5MwJjt8SZt5datKVri9n3,t,f,2020-10-01 04:12:34.732872-04
+4,john,a7eed23a7be6fe0d765197b1027453fe,john@broscience.htb,oGKsaSbjocXb3jwmnx5CmQLEjwZwESt6,t,f,2021-09-21 11:45:53.118482-04
+5,dmytro,5d15340bded5b9395d5d14b9c21bc82b,dmytro@broscience.htb,43p9iHX6cWjr9YhaUNtWxEBNtpneNMYm,t,f,2021-08-13 10:34:36.226763-04
+7,b,c98b089368da8fc238a080d359339e1d,b@gmail.com,lawkOeG6HAQZ3o6xgfTYcZtrZGfYRSj4,f,f,2023-01-21 10:57:11.602006-05
+6,ass,cbc933f64fc803f30344d43a153bf15d,ass@gmail.com,yMWD2eSTlqmCV4mvopKYlFKEfg9puCN2,t,f,2023-01-21 10:56:10.459485-05

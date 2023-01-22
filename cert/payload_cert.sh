@@ -8,6 +8,3 @@ openssl req -x509 -sha256 -nodes -newkey rsa:4096 -keyout ./broscience.key -out 
     $1
     Broscience
     " 2>/dev/null
-
-    
-

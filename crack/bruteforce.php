@@ -7,7 +7,7 @@ function check_hash($hash, $hash_to_crack, $word){
 };
 
 function print_progress($counter){
-    if ($counter % 100000 == 0) {
+    if ($counter % 10000 == 0) {
         echo "Tried ".$counter." word combinations\n";
     };
 };
@@ -27,7 +27,6 @@ while(! feof($file)){
     $words[] = fgets($file);
 }
 fclose($file);
-
 
 $counter = 0;    
 foreach($words as $word){
