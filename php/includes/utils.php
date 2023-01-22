@@ -122,10 +122,5 @@ class AvatarInterface {
 
 // so avatar is just copying pasting the contents of the tmp file into the imgPath file
 
-//Avatar interface is just a class that upon unserialization will create and call the save function 
-// on the avatar class
-
-//so basically there is a possibility to build a class that will be able to write arbitrary files 
-// to the server and we can access those later on. 
-
+// magic method __wakeup will get executed upon unserialization
 ?>
